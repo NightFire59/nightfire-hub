@@ -6,89 +6,161 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial;
-      background: #111;
-      color: orange;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0a0a0a, #111);
+      color: white;
     }
 
+    /* TOP BAR */
     .topbar {
-      background: black;
-      padding: 15px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+      background: #000;
       border-bottom: 2px solid orange;
+      box-shadow: 0 0 10px orange;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: orange;
+      text-shadow: 0 0 8px orange;
+    }
+
+    .auth {
+      color: #ccc;
+    }
+
+    /* SIDE BARS */
+    .sidebar-left, .sidebar-right {
+      position: fixed;
+      top: 70px;
+      width: 200px;
+      height: calc(100% - 70px);
+      background: #0d0d0d;
+      padding: 20px;
     }
 
     .sidebar-left {
-      position: fixed;
       left: 0;
-      top: 60px;
-      width: 200px;
-      height: 100%;
-      background: #000;
-      padding: 20px;
-      border-right: 2px solid orange;
+      border-right: 1px solid #222;
     }
 
     .sidebar-right {
-      position: fixed;
       right: 0;
-      top: 60px;
-      width: 200px;
-      height: 100%;
-      background: #000;
-      padding: 20px;
-      border-left: 2px solid orange;
+      border-left: 1px solid #222;
     }
 
+    .sidebar-left p, .sidebar-right p {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .sidebar-left p:hover, .sidebar-right p:hover {
+      background: rgba(255, 165, 0, 0.1);
+      color: orange;
+    }
+
+    /* MAIN AREA */
     .main {
       margin-left: 220px;
       margin-right: 220px;
-      padding: 20px;
+      padding: 30px;
     }
 
-    .card {
-      background: #333;
-      padding: 20px;
+    .welcome {
+      font-size: 24px;
       margin-bottom: 20px;
-      border-radius: 15px;
     }
+
+    /* CARDS */
+    .card {
+      background: #121212;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      border: 1px solid #222;
+      box-shadow: 0 0 10px rgba(255, 165, 0, 0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      box-shadow: 0 0 15px rgba(255, 165, 0, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .card h2 {
+      color: orange;
+      margin-top: 0;
+    }
+
+    /* TAG STYLE (like small UI labels) */
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      background: rgba(255, 165, 0, 0.2);
+      border-radius: 6px;
+      margin: 5px 5px 0 0;
+      font-size: 12px;
+    }
+
   </style>
 </head>
 
 <body>
 
-<div class="topbar">
-  <div>🔥 Nightfire Plus</div>
-  <div>Login | Sign Up</div>
-</div>
-
-<div class="sidebar-left">
-  <p>🏠 Home</p>
-  <p>📜 Posts</p>
-  <p>🎮 Games</p>
-</div>
-
-<div class="sidebar-right">
-  <p>👥 Friends</p>
-  <p>⚡ Activity</p>
-  <p>🎨 Themes</p>
-</div>
-
-<div class="main">
-  <h1>Welcome, Guest</h1>
-
-  <div class="card">
-    <h2>Update Log</h2>
-    <p>Site just launched 🔥</p>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="logo">🔥 Nightfire Hub</div>
+    <div class="auth">Login | Sign Up</div>
   </div>
 
-  <div class="card">
-    <h2>Clans</h2>
-    <p>Create a clan and invite your friends!</p>
+  <!-- LEFT SIDEBAR -->
+  <div class="sidebar-left">
+    <p>🏠 Home</p>
+    <p>📜 Posts</p>
+    <p>🎮 Games</p>
+    <p>🏆 Ranks</p>
   </div>
 
-</div>
+  <!-- RIGHT SIDEBAR -->
+  <div class="sidebar-right">
+    <p>👥 Friends</p>
+    <p>⚡ Activity</p>
+    <p>🎨 Themes</p>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <div class="welcome">Welcome, Guest-1g3k3</div>
+
+    <div class="card">
+      <h2>📢 Update Log</h2>
+      <p>Nightfire Hub just launched 🚀</p>
+      <span class="tag">New</span>
+      <span class="tag">Update</span>
+    </div>
+
+    <div class="card">
+      <h2>⚔ Clans</h2>
+      <p>Create or join a clan and build your community.</p>
+      <span class="tag">Community</span>
+      <span class="tag">Social</span>
+    </div>
+
+    <div class="card">
+      <h2>🎮 Games</h2>
+      <p>Your games will appear here.</p>
+      <span class="tag">Coming Soon</span>
+    </div>
+
+  </div>
 
 </body>
 </html>
