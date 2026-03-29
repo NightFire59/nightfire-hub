@@ -2,13 +2,104 @@
 <html>
 <head>
   <title>Posts - Nightfire Plus</title>
+
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: Arial;
+      padding: 20px;
+    }
+
+    h1 {
+      color: orange;
+    }
+
+    .post-box {
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      background: #111;
+      border: 1px solid #333;
+      color: white;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 10px;
+      background: orange;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .post {
+      background: #111;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #222;
+    }
+
+    .name {
+      color: orange;
+      font-weight: bold;
+    }
+  </style>
 </head>
-<body style="background:black; color:white; font-family:Arial;">
+
+<body>
 
 <h1>📜 Posts</h1>
-<p>This is where posts will go.</p>
+
+<div class="post-box">
+  <input id="name" placeholder="Your name">
+  <textarea id="message" placeholder="Write something..."></textarea>
+  <button onclick="addPost()">Post</button>
+</div>
+
+<div id="posts"></div>
 
 <a href="index.html">⬅ Back to Home</a>
+
+<script>
+let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+function displayPosts() {
+  const container = document.getElementById("posts");
+  container.innerHTML = "";
+
+  posts.forEach(p => {
+    container.innerHTML += `
+      <div class="post">
+        <div class="name">${p.name}</div>
+        <div>${p.message}</div>
+      </div>
+    `;
+  });
+}
+
+function addPost() {
+  const name = document.getElementById("name").value || "Anonymous";
+  const message = document.getElementById("message").value;
+
+  if (message.trim() === "") return;
+
+  posts.unshift({ name, message });
+
+  localStorage.setItem("posts", JSON.stringify(posts));
+
+  document.getElementById("message").value = "";
+
+  displayPosts();
+}
+
+displayPosts();
+</script>
 
 </body>
 </html>
