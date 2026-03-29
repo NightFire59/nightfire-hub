@@ -1,166 +1,200 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Nightfire Plus</title>
+<title>Nightfire Plus</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #0a0a0a, #111);
-      color: white;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #0a0a0a, #111);
+  color: white;
+}
 
-    /* TOP BAR */
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 25px;
-      background: #000;
-      border-bottom: 2px solid orange;
-      box-shadow: 0 0 10px orange;
-    }
+/* TOP BAR */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background: #000;
+  border-bottom: 2px solid orange;
+  box-shadow: 0 0 10px orange;
+}
 
-    .logo {
-      font-size: 20px;
-      font-weight: bold;
-      color: orange;
-      text-shadow: 0 0 8px orange;
-    }
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: orange;
+  text-shadow: 0 0 8px orange;
+}
 
-    .auth {
-      color: #ccc;
-    }
+.auth {
+  color: #ccc;
+}
 
-    /* SIDE BARS */
-    .sidebar-left, .sidebar-right {
-      position: fixed;
-      top: 70px;
-      width: 200px;
-      height: calc(100% - 70px);
-      background: #0d0d0d;
-      padding: 20px;
-    }
+/* SIDE BARS */
+.sidebar-left, .sidebar-right {
+  position: fixed;
+  top: 70px;
+  width: 200px;
+  height: calc(100% - 70px);
+  background: #0d0d0d;
+  padding: 20px;
+}
 
-    .sidebar-left {
-      left: 0;
-      border-right: 1px solid #222;
-    }
+.sidebar-left {
+  left: 0;
+  border-right: 1px solid #222;
+}
 
-    .sidebar-right {
-      right: 0;
-      border-left: 1px solid #222;
-    }
+.sidebar-right {
+  right: 0;
+  border-left: 1px solid #222;
+}
 
-    .sidebar-left p, .sidebar-right p {
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      transition: 0.2s;
-      cursor: pointer;
-    }
+/* LINK BUTTONS */
+.sidebar-left a, .sidebar-right a {
+  display: block;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #ccc;
+  transition: 0.2s;
+}
 
-    .sidebar-left p:hover, .sidebar-right p:hover {
-      background: rgba(255, 165, 0, 0.1);
-      color: orange;
-    }
+.sidebar-left a:hover, .sidebar-right a:hover {
+  background: rgba(255, 165, 0, 0.1);
+  color: orange;
+}
 
-    /* MAIN AREA */
-    .main {
-      margin-left: 220px;
-      margin-right: 220px;
-      padding: 30px;
-    }
+/* MAIN AREA */
+.main {
+  margin-left: 220px;
+  margin-right: 220px;
+  padding: 30px;
+}
 
-    .welcome {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
+.welcome {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
 
-    /* CARDS */
-    .card {
-      background: #121212;
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-      border: 1px solid #222;
-      box-shadow: 0 0 10px rgba(255, 165, 0, 0.1);
-      transition: 0.3s;
-    }
+/* CARDS */
+.card {
+  background: #121212;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #222;
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.1);
+  transition: 0.3s;
+}
 
-    .card:hover {
-      box-shadow: 0 0 15px rgba(255, 165, 0, 0.3);
-      transform: translateY(-3px);
-    }
+.card:hover {
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.3);
+  transform: translateY(-3px);
+}
 
-    .card h2 {
-      color: orange;
-      margin-top: 0;
-    }
+.card h2 {
+  color: orange;
+  margin-top: 0;
+}
 
-    /* TAG STYLE (like small UI labels) */
-    .tag {
-      display: inline-block;
-      padding: 5px 10px;
-      background: rgba(255, 165, 0, 0.2);
-      border-radius: 6px;
-      margin: 5px 5px 0 0;
-      font-size: 12px;
-    }
+/* TAGS */
+.tag {
+  display: inline-block;
+  padding: 5px 10px;
+  background: rgba(255, 165, 0, 0.2);
+  border-radius: 6px;
+  margin: 5px 5px 0 0;
+  font-size: 12px;
+}
 
-  </style>
+/* MUSIC BUTTON */
+.music-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: black;
+  color: orange;
+  border: 1px solid orange;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+</style>
+
 </head>
-
 <body>
 
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <div class="logo">🔥 Nightfire Plus</div>
-    <div class="auth">Login | Sign Up</div>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="logo">🔥 Nightfire Plus</div>
+  <div class="auth">Login | Sign Up</div>
+</div>
+
+<!-- LEFT SIDEBAR -->
+<div class="sidebar-left">
+  <a href="index.html">🏠 Home</a>
+  <a href="posts.html">📜 Posts</a>
+  <a href="games.html">🎮 Games</a>
+  <a href="ranks.html">🏆 Ranks</a>
+</div>
+
+<!-- RIGHT SIDEBAR -->
+<div class="sidebar-right">
+  <a href="friends.html">👥 Friends</a>
+  <a href="activity.html">⚡ Activity</a>
+  <a href="themes.html">🎨 Themes</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+  <div class="welcome">Welcome, Guest-1g3k3</div>
+
+  <div class="card">
+    <h2>📢 Update Log</h2>
+    <p>Nightfire Hub just launched 🚀</p>
+    <span class="tag">New</span>
+    <span class="tag">Update</span>
   </div>
 
-  <!-- LEFT SIDEBAR -->
-  <div class="sidebar-left">
-    <p>🏠 Home</p>
-    <p>📜 Posts</p>
-    <p>🎮 Games</p>
-    <p>🏆 Ranks</p>
+  <div class="card">
+    <h2>⚔ Clans</h2>
+    <p>Create or join a clan and build your community.</p>
+    <span class="tag">Community</span>
+    <span class="tag">Social</span>
   </div>
 
-  <!-- RIGHT SIDEBAR -->
-  <div class="sidebar-right">
-    <p>👥 Friends</p>
-    <p>⚡ Activity</p>
-    <p>🎨 Themes</p>
+  <div class="card">
+    <h2>🎮 Games</h2>
+    <p>Your games will appear here.</p>
+    <span class="tag">Coming Soon</span>
   </div>
+</div>
 
-  <!-- MAIN CONTENT -->
-  <div class="main">
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-    <div class="welcome">Welcome, Guest-1g3k3</div>
+<button class="music-btn" onclick="toggleMusic()">🔊 Music</button>
 
-    <div class="card">
-      <h2>📢 Update Log</h2>
-      <p>Nightfire Hub just launched 🚀</p>
-      <span class="tag">New</span>
-      <span class="tag">Update</span>
-    </div>
+<script>
+let playing = false;
+const music = document.getElementById("bgMusic");
 
-    <div class="card">
-      <h2> ⚔ Clans</h2>
-      <p>Create or join a clan and build your community.</p>
-      <span class="tag">Community</span>
-      <span class="tag">Social</span>
-    </div>
-
-    <div class="card">
-      <h2> 🎮 Games</h2>
-      <p>Your games will appear here.</p>
-      <span class="tag">Coming Soon</span>
-    </div>
-
-  </div>
+function toggleMusic() {
+  if (playing) {
+    music.pause();
+  } else {
+    music.play();
+  }
+  playing = !playing;
+}
+</script>
 
 </body>
 </html>
