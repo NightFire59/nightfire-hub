@@ -34,7 +34,6 @@ body::before {
   border-bottom: 2px solid var(--accent);
   box-shadow: 0 0 10px var(--accent);
 }
-
 .logo { font-size: 20px; font-weight: bold; }
 
 /* NAV */
@@ -119,6 +118,23 @@ body::before {
   font-size: 28px;
 }
 
+/* LOGIN FORM */
+#loginForm {
+  background:#111;
+  padding:20px;
+  margin:20px auto;
+  width: 300px;
+  border:2px solid var(--accent);
+  border-radius:15px;
+  color:white;
+  text-align:left;
+}
+#loginForm input {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0;
+}
+
 /* MUSIC */
 .music-btn {
   position: fixed;
@@ -142,8 +158,6 @@ body::before {
     <a href="#">Shop</a>
     <a href="#">Channels</a>
     <a href="#">Books</a>
-    <a href="#" onclick="loginUser()">Login</a>
-    <a href="#" onclick="registerUser()">Register</a>
   </div>
 </div>
 
@@ -169,19 +183,20 @@ body::before {
     Welcome: <span id="username">Guest</span>
   </div>
 
+  <!-- LOGIN/REGISTER FORM -->
+  <div id="loginForm">
+    <h3>Login / Register</h3>
+    <label>Username:</label>
+    <input type="text" id="loginUser" placeholder="Username">
+    <label>Password:</label>
+    <input type="password" id="loginPass" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <button onclick="register()">Register</button>
+  </div>
+
   <div class="card">
     <div class="card-title">Update log</div>
     <p>Nightfire Plus just launched 🚀</p>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Clans</div>
-    <p>Make a clan and invite your friends!</p>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Themes</div>
-    <p>Upload your own background soon 👀</p>
   </div>
 </div>
 
@@ -194,54 +209,44 @@ body::before {
 <script>
 let playing = false;
 const music = document.getElementById("music");
-function toggleMusic() {
-  playing ? music.pause() : music.play();
-  playing = !playing;
-}
+function toggleMusic() { playing ? music.pause() : music.play(); playing=!playing; }
 
-/* SIMPLE LOGIN/REGISTER */
-function registerUser() {
-  const name = prompt("Enter username:");
-  const pass = prompt("Enter password:");
-  if(!name||!pass)return alert("Invalid input");
-  let users = JSON.parse(localStorage.getItem("nf_users")||"{}");
-  if(users[name]) return alert("Username exists!");
-  users[name]=pass;
+/* LOGIN/REGISTER SYSTEM */
+function register(){
+  const user=document.getElementById("loginUser").value;
+  const pass=document.getElementById("loginPass").value;
+  if(!user||!pass){ alert("Fill both fields"); return; }
+  let users=JSON.parse(localStorage.getItem("nf_users")||"{}");
+  if(users[user]){ alert("Username exists"); return; }
+  users[user]=pass;
   localStorage.setItem("nf_users", JSON.stringify(users));
-  alert("Registered! Log in now.");
+  alert("Registered! Now login.");
 }
 
-function loginUser() {
-  const name = prompt("Username:");
-  const pass = prompt("Password:");
-  let users = JSON.parse(localStorage.getItem("nf_users")||"{}");
-  if(users[name]&&users[name]===pass){
-    localStorage.setItem("nf_user", name);
-    document.getElementById("username").textContent = name;
-    alert("Logged in as "+name);
+function login(){
+  const user=document.getElementById("loginUser").value;
+  const pass=document.getElementById("loginPass").value;
+  let users=JSON.parse(localStorage.getItem("nf_users")||"{}");
+  if(users[user]&&users[user]===pass){
+    localStorage.setItem("nf_user", user);
+    document.getElementById("username").textContent=user;
+    alert("Logged in as "+user);
   } else alert("Wrong username/password");
 }
 
 /* LOAD USER AND THEME */
-window.onload = function() {
-  const saved = localStorage.getItem("nf_user");
-  if(saved) document.getElementById("username").textContent = saved;
-  
-  const bg = localStorage.getItem("nf_bg");
-  const color = localStorage.getItem("nf_color");
-  if(bg) document.body.style.backgroundImage = `url(${bg})`;
-  if(color) document.documentElement.style.setProperty("--accent", color);
+window.onload=function(){
+  const saved=localStorage.getItem("nf_user");
+  if(saved) document.getElementById("username").textContent=saved;
+  const color=localStorage.getItem("nf_color");
+  if(color) document.documentElement.style.setProperty("--accent",color);
 }
 
-/* THEME COLOR PICKER */
+/* THEME COLOR */
 function setAccentColor(color){
   document.documentElement.style.setProperty("--accent", color);
   localStorage.setItem("nf_color", color);
 }
-
-/* REMOVE URL HASH */
-window.addEventListener("hashchange",()=>{ history.replaceState(null,null," "); });
 </script>
-
 </body>
 </html>
