@@ -4,6 +4,10 @@
 <title>Nightfire Plus</title>
 
 <style>
+  :root {
+  --accent: orange;
+}
+  
 body {
   margin: 0;
   font-family: Georgia, serif;
@@ -282,6 +286,19 @@ window.onload = function() {
   if (saved) {
     document.getElementById("username").textContent = saved;
   }
+
+  /* LOAD THEME */
+const bg = localStorage.getItem("nf_bg");
+const color = localStorage.getItem("nf_color");
+
+if (bg) {
+  document.body.style.backgroundImage = `url(${bg})`;
+  document.body.style.backgroundSize = "cover";
+}
+
+if (color) {
+  document.documentElement.style.setProperty("--accent", color);
+}
 };
 </script>
 
