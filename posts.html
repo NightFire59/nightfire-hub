@@ -1,104 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Posts - Nightfire Plus</title>
-
-  <style>
-    body {
-      background: black;
-      color: white;
-      font-family: Arial;
-      padding: 20px;
-    }
-
-    h1 {
-      color: orange;
-    }
-
-    .post-box {
-      margin-bottom: 20px;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      background: #111;
-      border: 1px solid #333;
-      color: white;
-      border-radius: 8px;
-    }
-
-    button {
-      padding: 10px;
-      background: orange;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .post {
-      background: #111;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: 1px solid #222;
-    }
-
-    .name {
-      color: orange;
-      font-weight: bold;
-    }
-  </style>
+<title>Posts - Nightfire Plus</title>
+<style>
+body{background:#111;color:orange;font-family:Arial;text-align:center;padding:20px;}
+.card{background:rgba(60,60,60,0.85);margin:10px auto;padding:20px;border-radius:15px;width:60%;color:gold;}
+button{padding:10px;margin:10px;}
+</style>
 </head>
-
 <body>
 
+<a href="index.html" style="color: orange; text-decoration: none; font-size: 18px;">⬅ Home</a>
 <h1>📜 Posts</h1>
-
-<div class="post-box">
-  <input id="name" placeholder="Your name">
-  <textarea id="message" placeholder="Write something..."></textarea>
-  <button onclick="addPost()">Post</button>
-</div>
-
-<div id="posts"></div>
-
-<a href="index.html">⬅ Back to Home</a>
+<button onclick="addPost()">➕ Add Post</button>
+<div id="postsContainer"></div>
 
 <script>
-let posts = JSON.parse(localStorage.getItem("posts")) || [];
-
-function displayPosts() {
-  const container = document.getElementById("posts");
-  container.innerHTML = "";
-
-  posts.forEach(p => {
-    container.innerHTML += `
-      <div class="post">
-        <div class="name">${p.name}</div>
-        <div>${p.message}</div>
-      </div>
-    `;
-  });
-}
-
-function addPost() {
-  const name = document.getElementById("name").value || "Anonymous";
-  const message = document.getElementById("message").value;
-
-  if (message.trim() === "") return;
-
-  posts.unshift({ name, message });
-
-  localStorage.setItem("posts", JSON.stringify(posts));
-
-  document.getElementById("message").value = "";
-
+function addPost(){
+  const post = prompt("Write your post:");
+  if(!post) return;
+  let posts = JSON.parse(localStorage.getItem("nf_posts")||"[]");
+  posts.unshift({user:localStorage.getItem("nf_user")||"Guest",text:post});
+  localStorage.setItem("nf_posts", JSON.stringify(posts));
   displayPosts();
 }
 
-displayPosts();
+function displayPosts(){
+  const container=document.getElementById("postsContainer");
+  const posts=JSON.parse(localStorage.getItem("nf_posts")||"[]");
+  container.innerHTML="";
+  posts.forEach(p=>{
+    const div=document.createElement("div");
+    div.className="card";
+    div.innerHTML=`<strong>${p.user}</strong>: ${p.text}`;
+    container.appendChild(div);
+  });
+}
+window.onload=displayPosts;
 </script>
 
 </body>
