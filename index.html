@@ -1,4 +1,17 @@
-import { Analytics } from "@vercel/analytics/next"
+// pages/_app.js
+import '../styles/globals.css'
+import { Analytics } from "@vercel/analytics/next"  // <-- import at the top
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <Component {...pageProps} />  {/* your page content */}
+      <Analytics />  {/* this adds Vercel Analytics site-wide */}
+    </>
+  )
+}
+
+export default MyApp
 
 <!DOCTYPE html>
 <Analytics/>
