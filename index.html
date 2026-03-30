@@ -203,9 +203,6 @@ body::before {
   </div>
 </div>
 
-<!-- LOGIN -->
-<a href="login.html">Login</a>
-
 <!-- LEFT -->
 <div class="sidebar-left">
   <a href="ranks.html">Ranks</a>
@@ -300,6 +297,17 @@ if (color) {
   document.documentElement.style.setProperty("--accent", color);
 }
 };
+
+  /* THEME COLOR PICKER */
+function setAccentColor(color) {
+  document.documentElement.style.setProperty("--accent", color);
+  localStorage.setItem("nf_color", color);
+}
+
+/* HANDLE URL HASH */
+window.addEventListener("hashchange", () => {
+  history.replaceState(null, null, " "); // remove # from URL
+});
 </script>
 
 </body>
