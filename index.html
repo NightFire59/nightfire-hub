@@ -6,9 +6,22 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #0a0a0a, #111);
-  color: white;
+  font-family: Georgia, serif;
+  background: #1a1a1a;
+  color: orange;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND IMAGE (for future themes) */
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  z-index: -1;
 }
 
 /* TOP BAR */
@@ -16,106 +29,144 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #111;
   padding: 15px 25px;
-  background: #000;
   border-bottom: 2px solid orange;
   box-shadow: 0 0 10px orange;
+  animation: glow 3s infinite alternate;
 }
 
 .logo {
   font-size: 20px;
   font-weight: bold;
+}
+
+/* NAV */
+.top-links a {
   color: orange;
-  text-shadow: 0 0 8px orange;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
-.auth {
-  color: #ccc;
+.top-links a:hover {
+  text-shadow: 0 0 10px orange;
 }
 
-/* SIDE BARS */
-.sidebar-left, .sidebar-right {
+/* LEFT ANGLED PANEL */
+.sidebar-left {
   position: fixed;
   top: 70px;
+  left: 0;
   width: 200px;
   height: calc(100% - 70px);
-  background: #0d0d0d;
+  background: #111;
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+  border-right: 2px solid orange;
   padding: 20px;
 }
 
-.sidebar-left {
-  left: 0;
-  border-right: 1px solid #222;
-}
-
-.sidebar-right {
-  right: 0;
-  border-left: 1px solid #222;
-}
-
-/* LINK BUTTONS */
-.sidebar-left a, .sidebar-right a {
+.sidebar-left a {
   display: block;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 8px;
-  text-decoration: none;
-  color: #ccc;
-  transition: 0.2s;
-}
-
-.sidebar-left a:hover, .sidebar-right a:hover {
-  background: rgba(255, 165, 0, 0.1);
+  margin: 20px 0;
   color: orange;
+  text-decoration: none;
+  font-size: 20px;
 }
 
-/* MAIN AREA */
+/* RIGHT ANGLED PANEL */
+.sidebar-right {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  width: 220px;
+  height: calc(100% - 70px);
+  background: #111;
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+  border-left: 2px solid orange;
+  padding: 20px;
+  text-align: right;
+}
+
+.sidebar-right a {
+  display: block;
+  margin: 30px 0;
+  color: orange;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+/* MAIN */
 .main {
-  margin-left: 220px;
+  margin-left: 200px;
   margin-right: 220px;
   padding: 30px;
+  text-align: center;
 }
 
 .welcome {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 40px;
+}
+
+.username {
+  color: red;
 }
 
 /* CARDS */
 .card {
-  background: #121212;
-  padding: 20px;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  border: 1px solid #222;
-  box-shadow: 0 0 10px rgba(255, 165, 0, 0.1);
+  background: rgba(60,60,60,0.85);
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 25px;
+  width: 70%;
+  color: gold;
+  backdrop-filter: blur(5px);
   transition: 0.3s;
 }
 
 .card:hover {
-  box-shadow: 0 0 15px rgba(255, 165, 0, 0.3);
-  transform: translateY(-3px);
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px orange;
 }
 
-.card h2 {
-  color: orange;
-  margin-top: 0;
-}
-
-/* TAGS */
-.tag {
+.card-title {
+  background: rgba(80,80,80,0.9);
   display: inline-block;
-  padding: 5px 10px;
-  background: rgba(255, 165, 0, 0.2);
-  border-radius: 6px;
-  margin: 5px 5px 0 0;
-  font-size: 12px;
+  padding: 15px 40px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  font-size: 28px;
 }
 
-/* MUSIC BUTTON */
+/* LOGIN BOX */
+.login-box {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: #111;
+  padding: 15px;
+  border: 1px solid orange;
+  display: none;
+}
+
+.login-box input {
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.login-box button {
+  background: black;
+  color: orange;
+  border: 1px solid orange;
+  padding: 5px;
+  cursor: pointer;
+}
+
+/* MUSIC */
 .music-btn {
   position: fixed;
-  bottom: 20px;
+  bottom: 60px;
   right: 20px;
   background: black;
   color: orange;
@@ -124,59 +175,76 @@ body {
   border-radius: 10px;
   cursor: pointer;
 }
-</style>
 
+/* ANIMATION */
+@keyframes glow {
+  from { box-shadow: 0 0 5px orange; }
+  to { box-shadow: 0 0 20px orange; }
+}
+
+</style>
 </head>
+
 <body>
 
-<!-- TOP BAR -->
+<!-- TOP -->
 <div class="topbar">
-  <div class="logo">🔥 Nightfire Plus</div>
-  <div class="auth">Login | Sign Up</div>
+  <div class="logo">🔥 NIGHTFIRE | PLUS</div>
+
+  <div class="top-links">
+    <a href="#">Shop</a>
+    <a href="#">Channels</a>
+    <a href="#">Books</a>
+    <a href="#" onclick="toggleLogin()">Login</a>
+  </div>
 </div>
 
-<!-- LEFT SIDEBAR -->
+<!-- LOGIN -->
+<div class="login-box" id="loginBox">
+  <input type="text" id="usernameInput" placeholder="Enter name">
+  <button onclick="saveUser()">Enter</button>
+</div>
+
+<!-- LEFT -->
 <div class="sidebar-left">
-  <a href="index.html">🏠 Home</a>
-  <a href="posts.html">📜 Posts</a>
-  <a href="games.html">🎮 Games</a>
-  <a href="ranks.html">🏆 Ranks</a>
+  <a href="ranks.html">Ranks</a>
+  <a href="posts.html">Posts</a>
+  <a href="games.html">Games</a>
+  <a href="index.html">Home</a>
 </div>
 
-<!-- RIGHT SIDEBAR -->
+<!-- RIGHT -->
 <div class="sidebar-right">
-  <a href="friends.html">👥 Friends</a>
-  <a href="activity.html">⚡ Activity</a>
-  <a href="themes.html">🎨 Themes</a>
+  <a href="friends.html">Friends</a>
+  <a href="activity.html">Activity</a>
+  <a href="clans.html">Clans</a>
+  <a href="themes.html">Themes</a>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <div class="main">
-  <div class="welcome">Welcome, Guest-1g3k3</div>
+  <div class="welcome">
+    Welcome: <span class="username" id="username">Guest</span>
+  </div>
 
   <div class="card">
-    <h2>📢 Update Log</h2>
+    <div class="card-title">Update log</div>
     <p>Nightfire Plus just launched 🚀</p>
-    <span class="tag">New</span>
-    <span class="tag">Update</span>
   </div>
 
   <div class="card">
-    <h2>⚔ Clans</h2>
-    <p>Create or join a clan and build your community.</p>
-    <span class="tag">Community</span>
-    <span class="tag">Social</span>
+    <div class="card-title">Clans</div>
+    <p>Make a clan and invite your friends!</p>
   </div>
 
   <div class="card">
-    <h2>🎮 Games</h2>
-    <p>Your games will appear here.</p>
-    <span class="tag">Coming Soon</span>
+    <div class="card-title">Themes</div>
+    <p>Upload your own background soon 👀</p>
   </div>
 </div>
 
-<!-- BACKGROUND MUSIC -->
-<audio id="music.mp3" loop>
+<!-- MUSIC -->
+<audio id="music" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -184,8 +252,9 @@ body {
 
 <script>
 let playing = false;
-const music = document.getElementById("music.mp3");
+const music = document.getElementById("music");
 
+/* MUSIC */
 function toggleMusic() {
   if (playing) {
     music.pause();
@@ -194,6 +263,29 @@ function toggleMusic() {
   }
   playing = !playing;
 }
+
+/* LOGIN SYSTEM */
+function toggleLogin() {
+  const box = document.getElementById("loginBox");
+  box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+function saveUser() {
+  const name = document.getElementById("usernameInput").value;
+  if (name) {
+    localStorage.setItem("nf_user", name);
+    document.getElementById("username").textContent = name;
+    document.getElementById("loginBox").style.display = "none";
+  }
+}
+
+/* LOAD USER */
+window.onload = function() {
+  const saved = localStorage.getItem("nf_user");
+  if (saved) {
+    document.getElementById("username").textContent = saved;
+  }
+};
 </script>
 
 </body>
