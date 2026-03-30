@@ -5,14 +5,14 @@
 
 <style>
   :root {
-  --accent: orange;
+  --accent: var(--accent);
 }
   
 body {
   margin: 0;
   font-family: Georgia, serif;
   background: #1a1a1a;
-  color: orange;
+  color: var(--accent);
   overflow-x: hidden;
 }
 
@@ -35,8 +35,8 @@ body::before {
   align-items: center;
   background: #111;
   padding: 15px 25px;
-  border-bottom: 2px solid orange;
-  box-shadow: 0 0 10px orange;
+  border-bottom: 2px var(--accent);
+  box-shadow: 0 0 10px var(--accent);
   animation: glow 3s infinite alternate;
 }
 
@@ -47,14 +47,14 @@ body::before {
 
 /* NAV */
 .top-links a {
-  color: orange;
+  color: var(--accent);
   margin: 0 10px;
   text-decoration: none;
   transition: 0.3s;
 }
 
 .top-links a:hover {
-  text-shadow: 0 0 10px orange;
+  text-shadow: 0 0 10px var(--accent);
 }
 
 /* LEFT ANGLED PANEL */
@@ -66,7 +66,7 @@ body::before {
   height: calc(100% - 70px);
   background: #111;
   clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
-  border-right: 2px solid orange;
+  border-right: 2px solid var(--accent);
   padding: 20px;
 }
 
@@ -87,7 +87,7 @@ body::before {
   height: calc(100% - 70px);
   background: #111;
   clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
-  border-left: 2px solid orange;
+  border-left: 2px solid var(--accent);
   padding: 20px;
   text-align: right;
 }
@@ -113,7 +113,7 @@ body::before {
 }
 
 .username {
-  color: red;
+  color: var(--accent);
 }
 
 /* CARDS */
@@ -130,7 +130,7 @@ body::before {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 15px orange;
+  box-shadow: 0 0 15px var(--accent);
 }
 
 .card-title {
@@ -149,7 +149,7 @@ body::before {
   right: 20px;
   background: #111;
   padding: 15px;
-  border: 1px solid orange;
+  border: 1px solid var(--accent);
   display: none;
 }
 
@@ -161,8 +161,8 @@ body::before {
 
 .login-box button {
   background: black;
-  color: orange;
-  border: 1px solid orange;
+  color: var(--accent);
+  border: 1px solid var(--accent);
   padding: 5px;
   cursor: pointer;
 }
@@ -174,7 +174,7 @@ body::before {
   right: 20px;
   background: black;
   color: orange;
-  border: 1px solid orange;
+  border: 1px solid var(--accent);
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
@@ -182,8 +182,8 @@ body::before {
 
 /* ANIMATION */
 @keyframes glow {
-  from { box-shadow: 0 0 5px orange; }
-  to { box-shadow: 0 0 20px orange; }
+  from { box-shadow: 0 0 5px var(--accent); }
+  to { box-shadow: 0 0 20px var(--accent); }
 }
 
 </style>
