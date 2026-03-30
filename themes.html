@@ -2,61 +2,27 @@
 <html>
 <head>
 <title>Themes - Nightfire Plus</title>
-
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #111;
-  color: orange;
-  text-align: center;
-  padding-top: 50px;
-}
-
-input, button {
-  margin: 10px;
-  padding: 10px;
-}
-
-button {
-  background: black;
-  color: orange;
-  border: 1px solid orange;
-  cursor: pointer;
-}
+body { background:black; color:white; font-family:Arial; text-align:center; }
+button{padding:10px;margin:5px;}
 </style>
 </head>
-
 <body>
 
-<h1>Themes</h1>
+<a href="index.html" style="color: orange; text-decoration: none; font-size: 18px;">⬅ Home</a>
 
-<h3>Upload Background</h3>
-<input type="file" id="bgUpload">
+<h1>🎨 Themes</h1>
 
-<h3>Pick Accent Color</h3>
-<input type="color" id="colorPicker">
-
-<br>
-<button onclick="saveTheme()">Save Theme</button>
+<p>Pick an accent color:</p>
+<button onclick="setAccentColor('orange')">Orange</button>
+<button onclick="setAccentColor('red')">Red</button>
+<button onclick="setAccentColor('gold')">Gold</button>
 
 <script>
-function saveTheme() {
-  const file = document.getElementById("bgUpload").files[0];
-  const color = document.getElementById("colorPicker").value;
-
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      localStorage.setItem("nf_bg", e.target.result);
-      localStorage.setItem("nf_color", color);
-      alert("Theme Saved!");
-    };
-    reader.readAsDataURL(file);
-  } else {
-    localStorage.setItem("nf_color", color);
-    alert("Color Saved!");
-  }
+function setAccentColor(color){
+  localStorage.setItem("nf_color", color);
+  document.documentElement.style.setProperty("--accent", color);
+  alert("Accent color saved! Go back home to see changes.");
 }
 </script>
 
