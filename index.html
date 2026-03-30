@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<Analytics/>
 <html>
 <head>
 <title>Nightfire Plus</title>
-
 <style>
-  :root {
-  --accent: var(--accent);
-}
-  
+:root { --accent: orange; }
+
 body {
   margin: 0;
   font-family: Georgia, serif;
@@ -17,7 +13,6 @@ body {
   overflow-x: hidden;
 }
 
-/* BACKGROUND IMAGE (for future themes) */
 body::before {
   content: "";
   position: fixed;
@@ -36,15 +31,11 @@ body::before {
   align-items: center;
   background: #111;
   padding: 15px 25px;
-  border-bottom: 2px var(--accent);
+  border-bottom: 2px solid var(--accent);
   box-shadow: 0 0 10px var(--accent);
-  animation: glow 3s infinite alternate;
 }
 
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-}
+.logo { font-size: 20px; font-weight: bold; }
 
 /* NAV */
 .top-links a {
@@ -53,12 +44,9 @@ body::before {
   text-decoration: none;
   transition: 0.3s;
 }
+.top-links a:hover { text-shadow: 0 0 10px var(--accent); }
 
-.top-links a:hover {
-  text-shadow: 0 0 10px var(--accent);
-}
-
-/* LEFT ANGLED PANEL */
+/* SIDE BARS */
 .sidebar-left {
   position: fixed;
   top: 70px;
@@ -70,7 +58,6 @@ body::before {
   border-right: 2px solid var(--accent);
   padding: 20px;
 }
-
 .sidebar-left a {
   display: block;
   margin: 20px 0;
@@ -79,7 +66,6 @@ body::before {
   font-size: 20px;
 }
 
-/* RIGHT ANGLED PANEL */
 .sidebar-right {
   position: fixed;
   top: 70px;
@@ -92,7 +78,6 @@ body::before {
   padding: 20px;
   text-align: right;
 }
-
 .sidebar-right a {
   display: block;
   margin: 30px 0;
@@ -108,14 +93,7 @@ body::before {
   padding: 30px;
   text-align: center;
 }
-
-.welcome {
-  font-size: 40px;
-}
-
-.username {
-  color: var(--accent);
-}
+.welcome { font-size: 40px; }
 
 /* CARDS */
 .card {
@@ -128,12 +106,10 @@ body::before {
   backdrop-filter: blur(5px);
   transition: 0.3s;
 }
-
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 15px var(--accent);
 }
-
 .card-title {
   background: rgba(80,80,80,0.9);
   display: inline-block;
@@ -141,31 +117,6 @@ body::before {
   border-radius: 20px;
   margin-bottom: 20px;
   font-size: 28px;
-}
-
-/* LOGIN BOX */
-.login-box {
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  background: #111;
-  padding: 15px;
-  border: 1px solid var(--accent);
-  display: none;
-}
-
-.login-box input {
-  padding: 5px;
-  margin-bottom: 10px;
-  width: 100%;
-}
-
-.login-box button {
-  background: black;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  padding: 5px;
-  cursor: pointer;
 }
 
 /* MUSIC */
@@ -180,27 +131,19 @@ body::before {
   border-radius: 10px;
   cursor: pointer;
 }
-
-/* ANIMATION */
-@keyframes glow {
-  from { box-shadow: 0 0 5px var(--accent); }
-  to { box-shadow: 0 0 20px var(--accent); }
-}
-
 </style>
 </head>
 
 <body>
-
 <!-- TOP -->
 <div class="topbar">
-  <div class="logo">🔥 NIGHTFIRE | PLUS</div>
-
+  <div class="logo">🔥 NIGHTFIRE PLUS</div>
   <div class="top-links">
     <a href="#">Shop</a>
     <a href="#">Channels</a>
     <a href="#">Books</a>
-    <a href="#" onclick="toggleLogin()">Login</a>
+    <a href="#" onclick="loginUser()">Login</a>
+    <a href="#" onclick="registerUser()">Register</a>
   </div>
 </div>
 
@@ -223,7 +166,7 @@ body::before {
 <!-- MAIN -->
 <div class="main">
   <div class="welcome">
-    Welcome: <span class="username" id="username">Guest</span>
+    Welcome: <span id="username">Guest</span>
   </div>
 
   <div class="card">
@@ -246,69 +189,58 @@ body::before {
 <audio id="music" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
-
 <button class="music-btn" onclick="toggleMusic()">🔊 Music</button>
 
 <script>
 let playing = false;
 const music = document.getElementById("music");
-
-/* MUSIC */
 function toggleMusic() {
-  if (playing) {
-    music.pause();
-  } else {
-    music.play();
-  }
+  playing ? music.pause() : music.play();
   playing = !playing;
 }
 
-/* LOGIN SYSTEM */
-function toggleLogin() {
-  const box = document.getElementById("loginBox");
-  box.style.display = box.style.display === "block" ? "none" : "block";
+/* SIMPLE LOGIN/REGISTER */
+function registerUser() {
+  const name = prompt("Enter username:");
+  const pass = prompt("Enter password:");
+  if(!name||!pass)return alert("Invalid input");
+  let users = JSON.parse(localStorage.getItem("nf_users")||"{}");
+  if(users[name]) return alert("Username exists!");
+  users[name]=pass;
+  localStorage.setItem("nf_users", JSON.stringify(users));
+  alert("Registered! Log in now.");
 }
 
-function saveUser() {
-  const name = document.getElementById("usernameInput").value;
-  if (name) {
+function loginUser() {
+  const name = prompt("Username:");
+  const pass = prompt("Password:");
+  let users = JSON.parse(localStorage.getItem("nf_users")||"{}");
+  if(users[name]&&users[name]===pass){
     localStorage.setItem("nf_user", name);
     document.getElementById("username").textContent = name;
-    document.getElementById("loginBox").style.display = "none";
-  }
+    alert("Logged in as "+name);
+  } else alert("Wrong username/password");
 }
 
-/* LOAD USER */
+/* LOAD USER AND THEME */
 window.onload = function() {
   const saved = localStorage.getItem("nf_user");
-  if (saved) {
-    document.getElementById("username").textContent = saved;
-  }
-
-  /* LOAD THEME */
-const bg = localStorage.getItem("nf_bg");
-const color = localStorage.getItem("nf_color");
-
-if (bg) {
-  document.body.style.backgroundImage = `url(${bg})`;
-  document.body.style.backgroundSize = "cover";
+  if(saved) document.getElementById("username").textContent = saved;
+  
+  const bg = localStorage.getItem("nf_bg");
+  const color = localStorage.getItem("nf_color");
+  if(bg) document.body.style.backgroundImage = `url(${bg})`;
+  if(color) document.documentElement.style.setProperty("--accent", color);
 }
 
-if (color) {
-  document.documentElement.style.setProperty("--accent", color);
-}
-};
-
-  /* THEME COLOR PICKER */
-function setAccentColor(color) {
+/* THEME COLOR PICKER */
+function setAccentColor(color){
   document.documentElement.style.setProperty("--accent", color);
   localStorage.setItem("nf_color", color);
 }
 
-/* HANDLE URL HASH */
-window.addEventListener("hashchange", () => {
-  history.replaceState(null, null, " "); // remove # from URL
-});
+/* REMOVE URL HASH */
+window.addEventListener("hashchange",()=>{ history.replaceState(null,null," "); });
 </script>
 
 </body>
